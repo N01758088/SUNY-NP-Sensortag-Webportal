@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Highstock Example</title>
+		<title>SUNY NP SensorTag</title>
 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<style type="text/css">
@@ -24,16 +24,28 @@ global: {
 
 
             title: {
-                text: 'TEMPERATURE'
+                text: 'Temperature',
+				style: {
+					fontFamily: 'Tahoma',
+					fontSize: '3em',
+					color: '#00009C',
+					fontWeight: 'bold'
+                }
             },
 
             subtitle: {
-                text: 'Current temperature is ' + <?php $db = new Connect_MySql();
+                text: ' Most recent temperature is ' + <?php $db = new Connect_MySql();
                           $sql = "select CAST(temperature as DECIMAL(5,2)) * 1.8 + 32 as temperature from sensor_table where temperature != \"\" order by timestamp desc limit 1 ";
                           $que = $db->execute($sql);
                           while ($row=$db->fetch_row($que)){?>
                     '<?php echo $row['temperature'] ?>'
-                          <?php }$db->close_db(); ?>
+                          <?php }$db->close_db(); ?> + '° F',
+				style: {
+					fontFamily: 'Arial',
+					fontSize: '1.5em',
+					color: '#FF6600',
+					fontWeight: 'bold'
+                }
             },
 
             xAxis: {
@@ -100,16 +112,28 @@ $(function () {
 
 
             title: {
-                text: 'HUMIDITY'
+                text: 'Humidity',
+				style: {
+					fontFamily: 'Tahoma',
+					fontSize: '3em',
+					color: '#00009C',
+					fontWeight: 'bold'
+                }
             },
 
             subtitle: {
-                text: 'Current humidity is ' + <?php $db = new Connect_MySql();
+                text: 'Most recent humidity is ' + <?php $db = new Connect_MySql();
                           $sql = "select SUBSTRING_INDEX(humidity,'\n', 1) as humidity from sensor_table where humidity != \"\" order by timestamp desc limit 1 ";
                           $que = $db->execute($sql);
                           while ($row=$db->fetch_row($que)){?>
                     '<?php echo $row['humidity'] ?>' 
-                          <?php }$db->close_db(); ?>
+                          <?php }$db->close_db(); ?> + ' %rH',
+				style: {
+					fontFamily: 'Arial',
+					fontSize: '1.5em',
+					color: '#FF6600',
+					fontWeight: 'bold'
+                }
             },
 
             xAxis: {
@@ -176,16 +200,28 @@ $(function () {
 
 
             title: {
-                text: 'BAROMETER'
+                text: 'Barometer',
+				style: {
+					fontFamily: 'Tahoma',
+					fontSize: '3em',
+					color: '#00009C',
+					fontWeight: 'bold'
+                }
             },
 
             subtitle: {
-                text: 'Current barometric pressure is ' + <?php $db = new Connect_MySql();
+                text: ' Most recent barometric pressure is ' + <?php $db = new Connect_MySql();
                           $sql = "select SUBSTRING_INDEX(barometer,'\n', 1) as barometer from sensor_table where barometer != \"\" order by timestamp desc limit 1 ";
                           $que = $db->execute($sql);
                           while ($row=$db->fetch_row($que)){?>
                     '<?php echo $row['barometer'] ?>' 
-                          <?php }$db->close_db(); ?>
+                          <?php }$db->close_db(); ?> + ' nPA',
+				style: {
+					fontFamily: 'Arial',
+					fontSize: '1.5em',
+					color: '#FF6600',
+					fontWeight: 'bold'
+                }
             },
 
             xAxis: {
@@ -250,6 +286,8 @@ setTimeout(function () {
 		</script>
 	</head>
 	<body>
+	<div id="logo" align="center" style="height:180px;padding-bottom:45px"> <img src="graphics/newpaltzlogo_180h.jpg" alt="SUNY New Paltz logo" > </div>
+
 <div id="container" style="height: 400px; min-width: 310px"></div>
 <div id="container2" style="height: 400px; min-width: 310px"></div>
 <div id="container3" style="height: 400px; min-width: 310px"></div>
