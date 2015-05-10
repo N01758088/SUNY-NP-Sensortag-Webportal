@@ -28,7 +28,12 @@ global: {
             },
 
             subtitle: {
-                text: 'Using ordinal X axis'
+                text: 'Current temperature is ' + <?php $db = new Connect_MySql();
+                          $sql = "select CAST(temperature as DECIMAL(5,2)) * 1.8 + 32 as temperature from sensor_table where temperature != \"\" order by timestamp desc limit 1 ";
+                          $que = $db->execute($sql);
+                          while ($row=$db->fetch_row($que)){?>
+                    '<?php echo $row['temperature'] ?>'
+                          <?php }$db->close_db(); ?>
             },
 
             xAxis: {
@@ -99,7 +104,12 @@ $(function () {
             },
 
             subtitle: {
-                text: 'Using ordinal X axis'
+                text: 'Current humidity is ' + <?php $db = new Connect_MySql();
+                          $sql = "select SUBSTRING_INDEX(humidity,'\n', 1) as humidity from sensor_table where humidity != \"\" order by timestamp desc limit 1 ";
+                          $que = $db->execute($sql);
+                          while ($row=$db->fetch_row($que)){?>
+                    '<?php echo $row['humidity'] ?>' 
+                          <?php }$db->close_db(); ?>
             },
 
             xAxis: {
@@ -129,7 +139,7 @@ $(function () {
                 type: 'area',
                 data : [
                     <?php $db = new Connect_MySql();
-                          $sql = "select UNIX_TIMESTAMP(timestamp) as timestamp, humidity from sensor_table where humidity != \"\" ";
+                          $sql = "select UNIX_TIMESTAMP(timestamp)*1000 as timestamp, SUBSTRING_INDEX(humidity,'\n', 1) as humidity from sensor_table where humidity != \"\" ";
                           $que = $db->execute($sql);
                           while ($row=$db->fetch_row($que)){?>
                     ['<?php echo $row['timestamp'] ?>', <?php echo $row['humidity'] ?>],
@@ -170,7 +180,12 @@ $(function () {
             },
 
             subtitle: {
-                text: 'Using ordinal X axis'
+                text: 'Current barometric pressure is ' + <?php $db = new Connect_MySql();
+                          $sql = "select SUBSTRING_INDEX(barometer,'\n', 1) as barometer from sensor_table where barometer != \"\" order by timestamp desc limit 1 ";
+                          $que = $db->execute($sql);
+                          while ($row=$db->fetch_row($que)){?>
+                    '<?php echo $row['barometer'] ?>' 
+                          <?php }$db->close_db(); ?>
             },
 
             xAxis: {
@@ -200,7 +215,7 @@ $(function () {
                 type: 'area',
                 data : [
                     <?php $db = new Connect_MySql();
-                          $sql = "select UNIX_TIMESTAMP(timestamp) as timestamp, SUBSTRING_INDEX(barometer,'\n', 1) as barometer from sensor_table where barometer != \"\" ";
+                          $sql = "select UNIX_TIMESTAMP(timestamp)*1000 as timestamp, SUBSTRING_INDEX(barometer,'\n', 1) as barometer from sensor_table where barometer != \"\" ";
                           $que = $db->execute($sql);
                           while ($row=$db->fetch_row($que)){?>
                     ['<?php echo $row['timestamp'] ?>', <?php echo $row['barometer'] ?>],
