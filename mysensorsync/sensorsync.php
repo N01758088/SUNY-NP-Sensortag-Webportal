@@ -1,7 +1,7 @@
 <?php
 
-$con=mysql_connect('127.0.0.1', 'root', 'ssg27395');
-mysql_select_db("suny_tempsensor_database", $con); //Name of the database
+$con=mysql_connect('127.0.0.1', 'root', 'password');
+mysql_select_db("db name", $con); //Name of the database
 
 $row_id=$_POST['row_id'];
 $device_id=$_POST['device_id'];

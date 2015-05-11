@@ -1,9 +1,9 @@
 <?php
 
 class Connect_MySql {   
-     var $obj = array ( "dbname"	=>	"suny_tempsensor_database",
-                       "dbuser"		=>	"root"		,
-                       "dbpwd"		=>	"ssg27395"		,
+     var $obj = array ( "dbname"	=>	"db name goes here",
+                       "dbuser"		=>	"username"		,
+                       "dbpwd"		=>	"password"		,
                        "dbhost"		=>	"localhost"	);
 
 
