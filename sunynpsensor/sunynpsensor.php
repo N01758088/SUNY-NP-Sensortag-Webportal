@@ -291,6 +291,7 @@ setTimeout(function () {
 <div id="container" style="height: 400px; min-width: 310px"></div>
 <div id="container2" style="height: 400px; min-width: 310px"></div>
 <div id="container3" style="height: 400px; min-width: 310px"></div>
+<div id="credits" align="center"><h4>Developed by Sethu Sundaramoorthy 2015</h4></div>
 
 <script src="js/highstock.js"></script>
 <script src="js/modules/exporting.js"></script>
